@@ -1,0 +1,73 @@
+Text Based Nation Simulation Game - TBNSG
+
+World Generation Details
+=======================
+industrialization - an integer from 1-3. On start of game, it will always be 1. Affects economic output. 
+
+economicOutput - a random integer from 10 to 25, generated at start.
+
+climate - a random number between 1 and 4, with 4 being the best for agriculture, and 
+1 being the worst. 
+
+4 - tropical, 3 - temperate, 2 - dry, 1 - tundra
+
+mainIndustry - self explanatory. A string.
+
+countryName - self explanatory. A string.
+
+Generate 10 - 20 countries. 6 are allies on
+defualt. random names.
+
+Gameplay
+=======================
+Foreign Relations:
+Upon generating the world, 20 other countries will be generated in addition to the one you control.
+They also have attributes like climate, economic output, etc. 
+You can trade with them. If they desire certain goods, say lumber, electricity, etc.
+
+
+Industries:
+
+Agriculture - EXPORTABLE - GOODS: Apples, Animal Products
+Mining - EXPORTABLE - GOODS: Minerals, 
+Manufacturing - EXPORTABLE - Electronics, Cars, 
+Fishing - EXPORTABLE - Fish, Crab, Tuttles
+Forestry - EXPORTABLE - Wood
+Utilities - SERVICE
+Construction - SERVICE
+Transportation - SERVICE
+Finance - SERVICE
+Real Estate - SERVICE
+Technical Services - SERVICE
+Waste Management - SERVICE
+Health Care - EXPORTABLE - Medicines, Medical Technology, Vaccinces, Band-Aids
+Entertainment - SERVICE- SERVICE
+Tourism - Service, Souvenirs, Exotic artifacts
+Food Services - SERVICE
+Worshipping Fu - SERVICE
+
+War:
+Choose a country to fight.
+Multiple factors decide the outcome.
+Factors include allies, economic output, etc.
+
+Increasing your economic output:
+================================
+
+To increase your economic output, you must first either increase your territory, so you can grow more items, or you must increase what industries you have. 
+
+INDUSTRY METHOD
+Starting new industries will first require an investment from you. There will be a 20% chance after 365 game days, but if you don't want to wait 30m for that to happen, you may invest money into that industry to start it sooner. Some industries will require infrastructure to build up. Taxation is necessary to get money from your industries, but be aware that excessive taxation can reduce economic output, therefore defeating the purpose. Find a good tax rate that works for both your government and your citizens. Industries increase your economic output, also making it easier for you to win a war. Note that upgrading your infrastructure also makes your citizens happier, adding to the extra boost you get from starting up the industry, meaning that it's overall in your interest to start up more industries.
+
+COUNTRIES:
+'Aardvark Republic', 'Appleopolis', 'Costa Ruran', 'Erenion', 'Exiturks', 'FU NO HAPPY', 'Jirwanlo', 'Kyrgeorguam', 'Maimary', 'Manne Namagas', 'Meso Dornialy', 'Mibyaguay', 'Naho Guiroswe', 'Origin', 'Republic of Roonserbo', """SYNTAX ERROR: line 17'TEE1ER' is not defined""", 'Saintmau', 'Syinel', 'The Kingdom of Fu', 'The States of Kotir', 'The Wedge of Cheese', 'The Wet Country'
+
+Cheats/commands
+=======================
+First, use 'cmd' to activate the command interface.
+
+LIST OF COMMANDS:
+-----------------------
+showCountryChar - shows information about your country.
+ct - bypasses entering informantion. ( known as " cheat" )
+
