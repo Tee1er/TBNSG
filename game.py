@@ -9,6 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import time
+
+#Checks when the game was started - important for the time() function.
+gameStart
 
 
 class Ui_MainWindow(object):
@@ -16,7 +20,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(2104, 1080)
         MainWindow.setStyleSheet("background-color: rgb(28, 44, 84);\n"
-"alternate-background-color: rgb(12, 20, 44);")
+    "alternate-background-color: rgb(12, 20, 44);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -24,15 +28,15 @@ class Ui_MainWindow(object):
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setAutoFillBackground(False)
         self.groupBox.setStyleSheet("background-color: rgb(12, 20, 44);\n"
-"border-radius: 10;")
+    "border-radius: 10;")
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.groupBox_2 = QtWidgets.QGroupBox(self.groupBox)
         self.groupBox_2.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(11, 83, 148);\n"
-"border-radius: 10;")
+    "background-color: rgb(11, 83, 148);\n"
+    "border-radius: 10;")
         self.groupBox_2.setTitle("")
         self.groupBox_2.setObjectName("groupBox_2")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox_2)
@@ -108,7 +112,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit.setFont(font)
         self.plainTextEdit.setAutoFillBackground(False)
         self.plainTextEdit.setStyleSheet("border-radius: 10;\n"
-"color: rgb(255, 255, 255);")
+    "color: rgb(255, 255, 255);")
         self.plainTextEdit.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.plainTextEdit.setReadOnly(True)
         self.plainTextEdit.setPlainText("")
@@ -116,8 +120,8 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.plainTextEdit, 4, 0, 1, 1)
         self.groupBox_3 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_3.setStyleSheet("border-color: rgb(28, 44, 84);\n"
-"background-color: rgb(11, 83, 148);\n"
-"border-radius: 10;")
+    "background-color: rgb(11, 83, 148);\n"
+    "border-radius: 10;")
         self.groupBox_3.setTitle("")
         self.groupBox_3.setObjectName("groupBox_3")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox_3)
@@ -141,8 +145,8 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.lineEdit.setFont(font)
         self.lineEdit.setStyleSheet("color: rgb(255, 255, 255);\n"
-"border-color: rgb(11, 83, 148);\n"
-"border-radius: 10;")
+    "border-color: rgb(11, 83, 148);\n"
+    "border-radius: 10;")
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout.addWidget(self.lineEdit)
@@ -152,24 +156,30 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        def dispUsrInput():
-                global userInput
-                userInput = self.lineEdit.displayText()
-                self.plainTextEdit.appendPlainText(f"\n >   {userInput} \n")
+#THE IMPORTANT STUFF: display user input, figure out what the user wants to do, display output :)
+#Essentially, this is where most of the game is.
 
-        def parseInput():
-                if userInput in ['help', 'Help', 'readme', '?']:
-                        self.plainTextEdit.appendPlainText('You can find information on TBNSG in readme.txt, found in the root directory of the game.')
-        
-        def dispOutput():
-                pass
+	def dispUsrInput():
+	    global userInput
+		userInput = self.lineEdit.displayText()
+		self.plainTextEdit.appendPlainText(f"\n >   {userInput} \n")
+
+	def parseInput(): #Parses input & displays output
+		if userInput in ['help', 'Help', '?']:
+			self.plainTextEdit.appendPlainText('You can find information on TBNSG in howto.txt, found in the root directory of the game.)
+
+	def time():
+        currentTime = time.time() - gameStart
+        return currentTime
 
 
-        self.retranslateUi(MainWindow)
-        self.lineEdit.returnPressed.connect(dispUsrInput)
-        self.lineEdit.returnPressed.connect(parseInput)
-        self.lineEdit.returnPressed.connect(self.lineEdit.clear)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+	self.retranslateUi(MainWindow)
+	self.lineEdit.returnPressed.connect(dispUsrInput)
+	self.lineEdit.returnPressed.connect(parseInput)
+	self.lineEdit.returnPressed.connect(self.lineEdit.clear)
+    self.lineEdit.returnPressed.connect(time)
+	QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
