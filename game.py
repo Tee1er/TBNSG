@@ -10,9 +10,19 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import time
+import json
+import random
 
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
+
+#Imports data from world.json
+world = json.load(open('world.json', 'r'))
+countries = world['otherCountries']
+countryList = countries.keys()
+
+#Imports data from defaultworld.json
+defaultWorld = json.load(open('defaultworld.json', 'r'))
 
 
 class Ui_MainWindow(object):
@@ -158,14 +168,22 @@ class Ui_MainWindow(object):
 
         #Most gameplay functions below: 
 
+        #The fundamentals - display output, parse input
+
+        def dispOutput(text):
+            self.plainTextEdit.appendPlainText(text)
+            
+
         def dispUsrInput():
             global userInput
             userInput = self.lineEdit.displayText()
-            self.plainTextEdit.appendPlainText(f"\n >   {userInput} \n")
+            dispOutput(f" >   {userInput} ")
 
         def parseInput():
             if userInput in ['help', 'Help', '?']:
-                self.plainTextEdit.appendPlainText('You can find information on TBNSG in readme.txt, found in the root directory of the game.')
+                dispOutput('You can find information on TBNSG in readme.txt, found in the root directory of the game.')
+            if userInput in ['declare war']:
+                declareWar()
 
 
         self.retranslateUi(MainWindow)
