@@ -183,8 +183,8 @@ class Ui_MainWindow(object):
             if userInput in ['help', 'Help', '?']:
                 dispOutput('You can find information on TBNSG in readme.txt, found in the root directory of the game.')
             if userInput in ['declare war']:
-                declareWar()
-
+                #declareWar()
+                pass
 
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
@@ -212,6 +212,6 @@ if __name__ == "__main__":
     MainWindow.show()
     sys.exit(app.exec_())
 
-gamedays = 0
+
 
 
