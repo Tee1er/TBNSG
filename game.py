@@ -214,7 +214,4 @@ if __name__ == "__main__":
 
 gamedays = 0
 
-while True:
-    time.sleep(1)
-    gamedays += 1
-    print("")
+
