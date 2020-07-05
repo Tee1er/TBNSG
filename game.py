@@ -211,3 +211,9 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+gamedays = 0
+
+while True:
+    time.sleep(1)
+    gamedays += 1
