@@ -9,9 +9,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import pyqtSignal
 import time
 import json
 import random
+
+Money = 20000000
+Taxation = 25
+EconOutput = 100000
+Happiness = 5.0
+
 
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
@@ -23,6 +30,7 @@ countryList = countries.keys()
 
 #Imports data from defaultworld.json
 defaultWorld = json.load(open('defaultworld.json', 'r'))
+
 
 
 class Ui_MainWindow(object):
@@ -186,6 +194,7 @@ class Ui_MainWindow(object):
                 #declareWar()
                 pass
 
+
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
         self.lineEdit.returnPressed.connect(parseInput)
@@ -195,10 +204,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Text Based Nation Simulation Game"))
-        self.label_3.setText(_translate("MainWindow", "Money - 5 million FuBucks"))
-        self.label.setText(_translate("MainWindow", "Economic Output - 40 million FuBucks"))
-        self.label_2.setText(_translate("MainWindow", "Happiness - 4.5/10"))
-        self.label_5.setText(_translate("MainWindow", "Taxation Rate - 25%"))
+        self.label_3.setText(_translate("MainWindow", "Money - "+str(Money/1000000)+" million FuBucks"))
+        self.label.setText(_translate("MainWindow", "Economic Output - "+str(EconOutput)+" million FuBucks"))
+        self.label_2.setText(_translate("MainWindow", "Happiness - "+str(Happiness)+"/10"))
+        self.label_5.setText(_translate("MainWindow", "Taxation Rate - "+str(Taxation)+"%"))
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
@@ -212,6 +221,14 @@ if __name__ == "__main__":
     MainWindow.show()
     sys.exit(app.exec_())
 
+
+    # gamedays = 0
+
+    # while True:
+    #     time.sleep(0.1)
+    #     gamedays += 1
+    #     Money += EconOutput
+    #     dispOutput(str(gamedays))
 
 
 
