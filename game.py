@@ -194,6 +194,8 @@ class Ui_MainWindow(object):
             refreshInfoBar()
         
         def tax():
+            global money
+            global econOutput
             money += econOutput*taxation
             econOutput -= econOutput*taxation
             if taxation == 1:
@@ -219,6 +221,12 @@ class Ui_MainWindow(object):
             if userInput in ['declare war']:
                 #declareWar()
                 pass
+            if 'change tax rate to' in userInput:
+                changeTax(userInput)
+            if userInput == 'tax':
+                tax()
+            if userInput in ['clock', 'time', 'years', 'days']:
+                dispOutput(f'Your country has existed for {years} years and {days} days.')
 
         def clock():
             currentTime = time.time() - gameStart
@@ -238,6 +246,7 @@ class Ui_MainWindow(object):
         #Other functions that aren't really gameplay
 
         def refreshInfoBar():
+            _translate = QtCore.QCoreApplication.translate
             self.label_3.setText(_translate('MainWindow', f'Money - ${money}'))
             self.label.setText(_translate('MainWindow', f'Economic Output - ${econOutput}'))
             self.label_2.setText(_translate('MainWindow', f'Happiness - {happiness}/10'))
@@ -247,6 +256,7 @@ class Ui_MainWindow(object):
         self.lineEdit.returnPressed.connect(dispUsrInput)
         self.lineEdit.returnPressed.connect(parseInput)
         self.lineEdit.returnPressed.connect(self.lineEdit.clear)
+        self.lineEdit.returnPressed.connect(clock)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
