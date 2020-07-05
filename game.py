@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal, QRunnable
 import time
 import json
 import random
@@ -20,8 +20,10 @@ EconOutput = 100000
 Happiness = 5.0
 
 
+
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
+
 
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
@@ -38,6 +40,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(2104, 1080)
         MainWindow.setStyleSheet("background-color: rgb(28, 44, 84);\n"
+        
 "alternate-background-color: rgb(12, 20, 44);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -193,7 +196,8 @@ class Ui_MainWindow(object):
             if userInput in ['declare war']:
                 #declareWar()
                 pass
-
+        
+        
 
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
@@ -212,6 +216,8 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
 
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -220,6 +226,7 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+    
 
 
     # gamedays = 0
