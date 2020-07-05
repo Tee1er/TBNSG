@@ -191,6 +191,8 @@ class Ui_MainWindow(object):
             taxation = float(changeTRTo)
             taxation = taxation/100
             dispOutput(f'Your tax rate has been changed to {round(taxation*100)}%')
+            if taxation == 1:
+                dispOutput('Welcome to communism, comrade.')
             refreshInfoBar()
         
         def tax():
@@ -198,10 +200,7 @@ class Ui_MainWindow(object):
             global econOutput
             money += econOutput*taxation
             econOutput -= econOutput*taxation
-            if taxation == 1:
-                dispOutput('Welcome to communism, comrade.')
-            else:
-                dispOutput('You have taxed the population.')
+            dispOutput('You have taxed the population.')
 
 
         #The fundamentals - display output, parse input
