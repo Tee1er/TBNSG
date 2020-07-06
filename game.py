@@ -17,7 +17,7 @@ import tkinter
 
 global money
 
-
+#hello teeler
 #do not use capitals when possible
 money = 20000000
 taxation = 0.1
