@@ -42,7 +42,7 @@ atWar = False
 atWarWith = []
 
 affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook", "YEE", 'ok', 'okay']
-negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
+negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no', 'NO IS NO', 'FU NO HAPPY WITH YOU', 'how dare you ask me this', 'shut up']
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -189,7 +189,9 @@ class Ui_MainWindow(object):
         #Most gameplay functions below: 
 
         def upgradeInfrastructure():
-            dispOutput(f'Okay. This will upgrade your infrastructure to level ')
+            infrastructureUpgradeCost=world['territory']/10  + 40000000*random.randint(0, 5)*world['infrastructure']
+            dispOutput(f'Okay. This will upgrade your infrastructure to level {world['infrastructure'] + 1} at the cost of {infrastructureUpgradeCost}')
+            
 
         
 
@@ -257,8 +259,7 @@ class Ui_MainWindow(object):
             if userInput in ['enemy', 'at war with?']:
                 statistics('enemy')
             if userInput == 'upgrade infrastructure':
-                infrastructureUpgradeCost=territory/10  + 40000000*random.randint(0, 10
-                dispOutput(f'This will upgrade your infrastructure at the cost of {infrastructureUpgradeCost}.')
+                upgradeInfrastructure()
         
 
             
