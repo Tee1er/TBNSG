@@ -26,9 +26,11 @@ econOutput = 100000
 happiness = 5.0
 
 
+
+
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
-
+print('hello')
 
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
@@ -274,6 +276,11 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+    # Call and start threads here
+
+    print('hi')
+
+    # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
