@@ -19,7 +19,7 @@ global money
 
 #hello tee1er
 #do not use capitals when possible
-money = 20000000
+money = 50000000
 taxation = 0.1
 econOutput = 100000
 happiness = 5.0
@@ -309,7 +309,7 @@ def thread_loop(name):
     while True:
         #this is actually a lot better than taxes b/c it's a constant stream of money, but is it realistic enough?; 
         econStability = (10-happiness)*50000
-        time.sleep(0.5)
+        time.sleep(2)
         dayss += 1
         randy = random.randint((econOutput-econStability), (econOutput+econStability))
         money += randy
