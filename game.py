@@ -184,9 +184,7 @@ class Ui_MainWindow(object):
 
         #Most gameplay functions below: 
 
-        def update_loop(name):
-            while True:
-                refreshInfoBar()
+        
 
         def changeTax(cmd):
             global taxation
@@ -273,7 +271,7 @@ class Ui_MainWindow(object):
 
         def update_loop(name):
             while True:
-                pass
+                refreshInfoBar()
 
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
