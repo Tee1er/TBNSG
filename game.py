@@ -12,7 +12,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
 import time, json, random, threading, logging
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 global money
 
@@ -30,23 +30,6 @@ negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
 
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
-
-# def thread_loop(name):
-#     global money
-#     global dispdays, years, days
-#     days = 1
-#     years = 0
-#     x = []
-#     y = []
-#     while True:
-#         time.sleep(3)
-#         days += 1
-#         x.append(days)
-#         y.append(money)
-#         print(f'check {days}')
-#         money += econOutput
-#         dispdays = days % 365
-#         years = days//365
             
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
@@ -230,7 +213,7 @@ class Ui_MainWindow(object):
 
         def parseInput():
             if userInput in ['help', 'Help', '?']:
-                dispOutput('You can find information on TBNSG in readme.txt, found in the root directory of the game.')
+                dispOutput('You can find information on TBNSG in howto.txt, found in the root directory of the game, or type readme')
             if userInput in ['declare war']:
                 #declareWar()
                 pass
@@ -242,14 +225,17 @@ class Ui_MainWindow(object):
                 dispOutput(f'Your country has existed for {years} years and {days} days.')
             if userInput in ['stop', 'quit', 'exit']:
                 dispOutput('Quitting...')
-                thr._stop()
+                thr1._stop()
+                thr2._stop()
                 quit()
+            if userInput == 'readme':
+                with open('howto.txt') as readme:
+                    dispOutput(readme.read())
+            if 'stats' in userInput:
+                Input = userInput.replace('stats ', '')
+                statistics(Input)
+        
 
-        # not neccesary after implementation of main loop process
-        # def clock():
-        #     currentTime = time.time() - gameStart
-        #     global years
-        #     global days
             
         #Stats
         def statistics(statistic):
@@ -258,9 +244,10 @@ class Ui_MainWindow(object):
             if statistic == 'tax rate':
                 dispOutput(f'The tax rate is currently {taxation*100}%')
             if statistic in ["financial", 'money']:
-                global x
-                global y
-                plt.plot(x, y)
+                thr2 = threading.Thread(target=graph, args=(1,), daemon=True)
+                thr2.start()
+            if statistic in ['help', '?']:
+                dispOutput('Statistics are:\ntime\ntax rate\nfinancial/money')
 
         #Other functions that aren't really gameplay
         def refreshInfoBar():
@@ -288,29 +275,40 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
 def thread_loop(name):
-    global money
-    global dispdays, years, days
+    global dispdays, years, days, money, y
     days = 1
     years = 0
     x = []
     y = []
     while True:
-        time.sleep(3)
+        econStability = (10-happiness)*50000
+        time.sleep(0.5)
         days += 1
+        randy = random.randint((econOutput-econStability), (econOutput+econStability))
+        money += randy
         x.append(days)
         y.append(money)
-        print(f'check {days}')
-        money += econOutput
         dispdays = days % 365
         years = days//365
+        
+        
+
+def graph(name):
+    global y
+    plt.plot(y)
+    plt.title('Financial Stats')
+    plt.ylabel('Money (FuBucks)')
+    plt.xlabel("Time (GameDays)")
+    plt.show()
+
 
 if __name__ == "__main__":
     import sys
     # Call and start threads here
     
     print('Threads Starting')
-    thr = threading.Thread(target=thread_loop, args=(1,), daemon=True)
-    thr.start()
+    thr1 = threading.Thread(target=thread_loop, args=(1,), daemon=True)
+    thr1.start()
     
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
