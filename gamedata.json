@@ -1,0 +1,105 @@
+{
+    "industries":{
+      "Agriculture": {
+        "minInfrastructure": 1,
+        "baseValueEO": 5000000000,
+        "produces":["Apples", "Crops", "Animal Products"],
+        "exportable":true
+      },
+      "Construction":{
+        "minInfrastructure":1,
+        "baseValueEO": 10000000000,
+        "exportable": false
+      },
+      "Entertainment":{
+        "minInfrastructure":1,
+        "baseValueEO": 7500000000,
+        "produces": ["music", "movies", "books", "games"],
+        "exportable":true
+      },
+      "Finance":{
+        "minInfrastructure":3,
+        "baseValueEO": 15000000000,
+        "produces":["financial services"],
+        "exportable": true
+      },
+      "Fishing":{
+        "minInfrastructure":1,
+        "baseValueEO": 1000000000,
+        "produces":["fish"],
+        "exportable":true
+      },
+      "Food":{
+        "minInfrastructure":1,
+        "baseValueEO":2000000000,
+        "produces":["food"],
+        "exportable":true
+      },
+      "Forestry":{
+        "minInfrastructure":1,
+        "baseValueEO":1000000000,
+        "produces":["wood"],
+        "exportable": true
+      },
+      "Health Care":{
+        "minInfrastructure":3,
+        "baseValueEO":5000000000,
+        "produces": ["medecines", "medical technology"],
+        "exportable": true
+      },
+      "Manufacturing":{
+        "minInfrastructure":3,
+        "baseValueEO":100000000000,
+        "produces":["electronics", "machinery"],
+        "exportable":true
+      },
+      "Mining":{
+        "minInfrastructure":1,
+        "baseValueEO":35000000000,
+        "produces":["rock", "iron", "fuzzyite", "space cheese"],
+        "exportable": true
+      },
+      "Real Estate":{
+        "minInfrastructure":2,
+        "baseValueEO":20000000000,
+        "produces":["real estate services"],
+        "exportable": false
+      },
+      "Technical Services":{
+        "minInfrastructure":3,
+        "baseValueEO":5000000000,
+        "produces":["software"],
+        "exportable": true
+      },
+      "Tourism":{
+        "minInfrastructure":2,
+        "baseValueEO": 15000000000,
+        "produces":["tourism", "SNOW GLOBEES"],
+        "exportable":false
+      },
+      "Transportation":{
+        "minInfrastructure":3,
+        "baseValueEO": 7500000000,
+        "produces":["trains", "planes", "boats", "cars", "helicopters"],
+        "exportable":true
+      },
+      "Utilities": {
+        "minInfrastructure":2,
+        "baseValueEO": 10000000000,
+        "produces":["electricity", "water", "gas"],
+        "exportable":false
+      },
+      "Waste Management":{
+        "minInfrastructure":2,
+        "baseValueEO": 2500000000,
+        "produces":["waste management"],
+        "exportable": true
+      },
+      "Worshipping Fu":{
+        "minInfrastructure":1,
+        "baseValueEO":0,
+        "produces":["approval from the apple gods"],
+        "exportable": false
+      }
+    }
+  }

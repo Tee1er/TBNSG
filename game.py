@@ -40,8 +40,11 @@ world = json.load(open('world.json', 'r'))
 countries = world['otherCountries']
 countryList = list(countries.keys())
 
-#Imports data from defaultworld.json
-defaultWorld = json.load(open('defaultworld.json', 'r'))
+#Imports data from gamedata.json
+gameData = json.load(open('gamedata.json', 'r'))
+
+industries = gameData['industries']
+industryList = list(industries.keys())
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
