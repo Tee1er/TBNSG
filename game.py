@@ -24,9 +24,10 @@ affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook",
 negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
 
 #Records when the game was started - important for function time() later on
-gameStart = time.time()
 print('Thread Function Here')
 def thread_loop(name):
+    global years
+    global days
     days = 1
     years = 0
     x = []
@@ -210,6 +211,7 @@ class Ui_MainWindow(object):
             money += econOutput*taxation
             econOutput -= econOutput*taxation
             dispOutput('You have taxed the population.')
+            refreshInfoBar()
 
         #The fundamentals - display output, parse input
 
@@ -233,16 +235,8 @@ class Ui_MainWindow(object):
                 tax()
             if userInput in ['clock', 'time', 'years', 'days']:
                 dispOutput(f'Your country has existed for {years} years and {days} days.')
-            if userInput in ['stop', 'quit', 'exit']:
-                dispOutput('Quitting...')
-                thr._stop()
-                quit()
-
-        # not neccesary after implementation of main loop process
-        # def clock():
-        #     currentTime = time.time() - gameStart
-        #     global years
-        #     global days
+            if userInput == 'tax rate':
+                statistics('tax rate')
             
         #Stats
         def statistics(statistic):
@@ -271,8 +265,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        #f-strings are faster and the preferred method of embedding variables in strings - more readable, less error prone, etc; yeah I know tyler, i just wanted to make it simple at first
-        MainWindow.setWindowTitle(_translate("MainWindow", "Text Based Nation Simulation Game"))
+        #f-strings are faster and the preferred method of embedding variables in strings - more readable, less error prone, etc; yeah I know tyler, i just wanted to make it simple at first; yes but they are BETTER i loike dem f strings - not Fu;
         self.label_3.setText(_translate("MainWindow", f"Money - {money/1000000} million FuBucks"))
         self.label.setText(_translate("MainWindow", f"Economic Output - {econOutput/1000000} million FuBucks"))
         self.label_2.setText(_translate("MainWindow", f"Happiness - {happiness/10}"))
