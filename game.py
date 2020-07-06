@@ -10,7 +10,7 @@
 #keep unnecessary features down to improve performance
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject, qapp
+from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
 import time, json, random, threading, logging
 import matplotlib.pyplot as plt
 import tkinter
@@ -273,7 +273,7 @@ class Ui_MainWindow(object):
             if statistic == 'tax rate':
                 dispOutput(f'The tax rate is currently {taxation*100}%')
             if statistic in ["financial", 'money']:
-                thr2 = threading.Thread(target=graph, args=(1,), daemon=True)
+                thr2 = threading.Thread(target=graph_money, args=(1,), daemon=True)
                 thr2.start()
             if statistic in ['help', '?']:
                 dispOutput('Statistics are:\ntime\ntax rate\nfinancial/money')
@@ -287,10 +287,6 @@ class Ui_MainWindow(object):
             self.label.setText(_translate("MainWindow", f"Economic Output - {round(economicOutput/1000000, 3)} million FuBucks"))
             self.label_2.setText(_translate("MainWindow", f"Happiness - {round(happiness/10, 2)}"))
             self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
-
-        def update_loop(name):
-            while True:
-                refreshInfoBar()
 
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
@@ -330,7 +326,7 @@ def thread_loop(name):
         
         
 
-def graph(name):
+def graph_money(name):
     global y
     plt.plot(y)
     plt.title('Financial Stats')
