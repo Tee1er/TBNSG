@@ -238,7 +238,7 @@ class Ui_MainWindow(object):
         #Stats
         def statistics(statistic):
             if statistic == 'time':
-                dispOutput(f'Your country has existed for {years} years and {dispdays} day(s).')
+                dispOutput(f'Your country has existed for {years} years and {days} day(s).')
             if statistic == 'tax rate':
                 dispOutput(f'The tax rate is currently {taxation*100}%')
             if statistic in ["financial", 'money']:
@@ -264,29 +264,29 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         #f-strings are faster and the preferred method of embedding variables in strings - more readable, less error prone, etc; yeah I know tyler, i just wanted to make it simple at first; yes but they are BETTER i loike dem f strings - not Fu;
-        self.label_3.setText(_translate("MainWindow", f"Money - {money/1000000} million FuBucks"))
-        self.label.setText(_translate("MainWindow", f"Economic Output - {econOutput/1000000} million FuBucks"))
-        self.label_2.setText(_translate("MainWindow", f"Happiness - {happiness/10}"))
+        self.label_3.setText(_translate("MainWindow", f"Money - {round(money/1000000, 3)} million FuBucks"))
+        self.label.setText(_translate("MainWindow", f"Economic Output - {round(econOutput/1000000, 3)} million FuBucks"))
+        self.label_2.setText(_translate("MainWindow", f"Happiness - {round(happiness/10, 2)}"))
         self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
 def thread_loop(name):
-    global dispdays, years, days, money, y
-    days = 1
-    years = 0
+    global years, days, money, y
     x = []
     y = []
     while True:
+        #this is actually a lot better than taxes b/c it's a constant stream of money, but is it realistic enough?; 
         econStability = (10-happiness)*50000
         time.sleep(0.5)
-        days += 1
         randy = random.randint((econOutput-econStability), (econOutput+econStability))
         money += randy
-        x.append(days)
+        # x.append(days)
         y.append(money)
-        dispdays = days % 365
-        years = days//365
+        # I think this method of keeping time is simpler and easier than the previous one. Every 3 seconds a day ticks past - it's approx. 20m = 1 year in game; 
+        currentTime = time.time() - gameStart
+        days = round((currentTime % 365)/3)
+        years = round((currentTime // 365)/3)
         
         
 
