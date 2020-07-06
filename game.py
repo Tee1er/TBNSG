@@ -19,6 +19,7 @@ import tkinter
 gameStart = time.time()
             
 #Imports data from world.json
+global world
 world = json.load(open('world.json', 'r'))
 countries = world['otherCountries']
 countryList = list(countries.keys())
@@ -29,8 +30,6 @@ gameData = json.load(open('gamedata.json', 'r'))
 industries = gameData['industries']
 industryList = list(industries.keys())
 
-global world
-
 #do not use capitals when possible
 world['infrastructure'] = 1
 world['money'] = 20000000
@@ -40,7 +39,7 @@ world['happiness'] = 5.0
 
 infrastructure = world['infrastructure']
 money = world['money']
-taxationRate = world['taxationRate']
+taxation = world['taxationRate']
 economicOutput = world['economicOutput']
 happiness = world['happiness']
 

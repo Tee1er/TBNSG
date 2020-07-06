@@ -4,6 +4,7 @@
     "economicOutput": 0,
     "taxationRate": 0.0,
     "happiness": 0.0,
+    "money": 0.0,
 	"characteristics": {
 		"climate": "0",
 		"industries": {
@@ -196,7 +197,5 @@
 			"territoryMin": 10000
 		}
 
-
-
-	}
+    }
 }
