@@ -262,6 +262,10 @@ class Ui_MainWindow(object):
             self.label_2.setText(_translate("MainWindow", f"Happiness - {round(happiness/10, 2)}"))
             self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
 
+        def update_loop(name):
+            while True:
+                pass
+
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
         self.lineEdit.returnPressed.connect(parseInput)
@@ -278,6 +282,10 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 3b8ee08202899bb3b8b9b5f54dcafd565c186270
 
 def thread_loop(name):
     global years, days, money, y
@@ -319,7 +327,7 @@ if __name__ == "__main__":
     print('Threads Starting')
     thr1 = threading.Thread(target=thread_loop, args=(1,), daemon=True)
     thr1.start()
-    thr3 = threading.Thread(target=update_loop, args=(1,), daemon=True)
+    thr3 = threading.Thread(target=Ui_MainWindow.setupUi.update_loop, args=(1,), daemon=True)
     thr3.start()
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
