@@ -318,7 +318,7 @@ if __name__ == "__main__":
     print('Threads Starting')
     thr1 = threading.Thread(target=thread_loop, args=(1,), daemon=True)
     thr1.start()
-    thr3 = threading.Thread(target=update_loop, args=(1,), daemon=True)
+    thr3 = threading.Thread(target=Ui_MainWindow.setupUi.update_loop, args=(1,), daemon=True)
     thr3.start()
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
