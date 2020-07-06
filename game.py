@@ -29,7 +29,7 @@ gameData = json.load(open('gamedata.json', 'r'))
 industries = gameData['industries']
 industryList = list(industries.keys())
 
-global money
+global world
 
 #do not use capitals when possible
 world['infrastructure'] = 1
@@ -37,6 +37,12 @@ world['money'] = 20000000
 world['taxationRate'] = 0.1
 world['economicOutput'] = 100000
 world['happiness'] = 5.0
+
+infrastructure = world['infrastructure']
+money = world['money']
+taxationRate = world['taxationRate']
+economicOutput = world['economicOutput']
+happiness = world['happiness']
 
 atWar = False
 atWarWith = []
@@ -191,11 +197,10 @@ class Ui_MainWindow(object):
 
         def upgradeInfrastructure():
             infrastructureUpgradeCost=world['territory']/10  + 40000000*random.randint(0, 5)*world['infrastructure']
-            dispOutput(f'Okay. This will upgrade your infrastructure to level {world['infrastructure'] + 1} at the cost of {infrastructureUpgradeCost}')
-            
-
+            # dispOutput(f'Your infrastructure has been upgraded to level {world['infrastructure'] + 1} at the cost of {infrastructureUpgradeCost}')
+            money -= infrastructureUpgradeCost
+            infrastructure += 1
         
-
         def changeTax(cmd):
             global taxation
             changeTRTo = userInput.replace('change tax rate to', '')
@@ -208,10 +213,8 @@ class Ui_MainWindow(object):
             refreshInfoBar()
         
         def tax():
-            global money
-            global econOutput
-            money += econOutput*taxation
-            econOutput -= econOutput*taxation
+            money += world['economicOutput']*taxation
+            economicOutput -= economicOutput*taxation
             dispOutput('You have taxed the population.')
             refreshInfoBar()
         
@@ -282,7 +285,7 @@ class Ui_MainWindow(object):
         def refreshInfoBar():
             _translate = QtCore.QCoreApplication.translate
             self.label_3.setText(_translate("MainWindow", f"Money - {round(money/1000000, 3)} million FuBucks"))
-            self.label.setText(_translate("MainWindow", f"Economic Output - {round(econOutput/1000000, 3)} million FuBucks"))
+            self.label.setText(_translate("MainWindow", f"Economic Output - {round(economicOutput/1000000, 3)} million FuBucks"))
             self.label_2.setText(_translate("MainWindow", f"Happiness - {round(happiness/10, 2)}"))
             self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
 
@@ -300,7 +303,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         #f-strings are faster and the preferred method of embedding variables in strings - more readable, less error prone, etc; yeah I know tyler, i just wanted to make it simple at first; yes but they are BETTER i loike dem f strings - not Fu;
         self.label_3.setText(_translate("MainWindow", f"Money - {round(money/1000000, 3)} million FuBucks"))
-        self.label.setText(_translate("MainWindow", f"Economic Output - {round(econOutput/1000000, 3)} million FuBucks"))
+        self.label.setText(_translate("MainWindow", f"Economic Output - {round(economicOutput/1000000, 3)} million FuBucks"))
         self.label_2.setText(_translate("MainWindow", f"Happiness - {round(happiness/10, 2)}"))
         self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
@@ -317,7 +320,7 @@ def thread_loop(name):
         econStability = (10-happiness)*50000
         time.sleep(2)
         dayss += 1
-        randy = random.randint((econOutput-econStability), (econOutput+econStability))
+        randy = random.randint((economicOutput-econStability), (economicOutput+econStability))
         money += randy
         # x.append(days)
         y.append(money)
