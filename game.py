@@ -314,7 +314,7 @@ def thread_loop(name):
     while True:
         #this is actually a lot better than taxes b/c it's a constant stream of money, but is it realistic enough?; 
         econStability = (10-happiness)*50000
-        time.sleep(0.5)
+        time.sleep(2)
         dayss += 1
         randy = random.randint((econOutput-econStability), (econOutput+econStability))
         money += randy
