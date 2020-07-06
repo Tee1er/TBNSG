@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
 import time, json, random, threading, logging
 import matplotlib.pyplot as plt
+import tkinter
 
 global money
 
@@ -207,6 +208,8 @@ class Ui_MainWindow(object):
         def dispOutput(text):
             self.plainTextEdit.appendPlainText(text)
             
+
+        
         def dispUsrInput():
             global userInput
             userInput = self.lineEdit.displayText()
@@ -232,6 +235,8 @@ class Ui_MainWindow(object):
             if 'stats' in userInput:
                 Input = userInput.replace('stats ', '')
                 statistics(Input)
+            if userInput == "":
+                refreshInfoBar()
         
 
             
@@ -250,10 +255,10 @@ class Ui_MainWindow(object):
         #Other functions that aren't really gameplay
         def refreshInfoBar():
             _translate = QtCore.QCoreApplication.translate
-            self.label_3.setText(_translate('MainWindow', f'Money - ${money}'))
-            self.label.setText(_translate('MainWindow', f'Economic Output - ${econOutput}'))
-            self.label_2.setText(_translate('MainWindow', f'Happiness - {happiness}/10'))
-            self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {round(taxation*100)}%"))
+            self.label_3.setText(_translate("MainWindow", f"Money - {round(money/1000000, 3)} million FuBucks"))
+            self.label.setText(_translate("MainWindow", f"Economic Output - {round(econOutput/1000000, 3)} million FuBucks"))
+            self.label_2.setText(_translate("MainWindow", f"Happiness - {round(happiness/10, 2)}"))
+            self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
 
         self.retranslateUi(MainWindow)
         self.lineEdit.returnPressed.connect(dispUsrInput)
@@ -270,6 +275,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", f"Taxation Rate - {taxation*100}%"))
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
+
 
 def thread_loop(name):
     global years, days, money, y
@@ -298,6 +304,9 @@ def graph(name):
     plt.xlabel("Time (GameDays)")
     plt.show()
 
+def update_loop(name):
+    while True:
+        refreshInfoBar()
 
 if __name__ == "__main__":
     import sys
@@ -306,7 +315,8 @@ if __name__ == "__main__":
     print('Threads Starting')
     thr1 = threading.Thread(target=thread_loop, args=(1,), daemon=True)
     thr1.start()
-    
+    thr3 = threading.Thread(target=update_loop, args=(1,), daemon=True)
+    thr3.start()
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
