@@ -287,8 +287,9 @@ if __name__ == "__main__":
     import sys
     # Call and start threads here
     print('Threads Starting')
-    thr = threading.Thread(target=thread_loop, args=(1,))
+    thr = threading.Thread(target=thread_loop, args=(1,), daemon=True)
     thr.start()
+    
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
