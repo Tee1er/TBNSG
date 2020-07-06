@@ -12,11 +12,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
-import time
-import json
-import random
-import threading
-import logging
+import time, json, random, threading, logging
+from matplotlib import pyplot as plt
 
 
 #do not use capitals when possible
@@ -30,7 +27,7 @@ happiness = 5.0
 
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
-print('hello')
+print('Thread Function Here')
 
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
@@ -243,7 +240,10 @@ class Ui_MainWindow(object):
                 dispOutput(f'Your country has existed for {years} years and {days} day(s).')
             if statistic == 'tax rate':
                 dispOutput(f'The tax rate is currently {taxation*100}%')
-
+            if statistic in ["financial", 'money']:
+                global x
+                global y
+                plt.plot(x, y)
         #Other functions that aren't really gameplay
 
         def refreshInfoBar():
@@ -262,7 +262,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        #F-strings are faster and the preferred method of embedding variables in strings - more readable, less error prone, etc
+        #f-strings are faster and the preferred method of embedding variables in strings - more readable, less error prone, etc; yeah I know tyler, i just wanted to make it simple at first
         MainWindow.setWindowTitle(_translate("MainWindow", "Text Based Nation Simulation Game"))
         self.label_3.setText(_translate("MainWindow", f"Money - {money/1000000} million FuBucks"))
         self.label.setText(_translate("MainWindow", f"Economic Output - {econOutput/1000000} million FuBucks"))
@@ -277,8 +277,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     # Call and start threads here
-
-    print('hi')
+    print('Threads Starting')
 
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
