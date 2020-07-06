@@ -35,7 +35,7 @@ gameStart = time.time()
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
 countries = world['otherCountries']
-countryList = countries.keys()
+countryList = list(countries.keys())
 
 #Imports data from defaultworld.json
 defaultWorld = json.load(open('defaultworld.json', 'r'))
@@ -202,13 +202,15 @@ class Ui_MainWindow(object):
             econOutput -= econOutput*taxation
             dispOutput('You have taxed the population.')
             refreshInfoBar()
+        
+        def declareWar(cmd):
+            cmd.strip('declare war')
+            if cmd in list()
+
 
         #The fundamentals - display output, parse input
-
         def dispOutput(text):
             self.plainTextEdit.appendPlainText(text)
-            
-#abc abc abc abc
         
         def dispUsrInput():
             global userInput
@@ -218,7 +220,7 @@ class Ui_MainWindow(object):
         def parseInput():
             if userInput in ['help', 'Help', '?']:
                 dispOutput('You can find information on TBNSG in howto.txt, found in the root directory of the game, or type readme')
-            if userInput in ['declare war']:
+            if 'declare war' in userInput:
                 #declareWar()
                 pass
             if 'change tax rate to' in userInput:
@@ -276,9 +278,6 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
-        def update_loop(name):
-            while True:
-                pass
 
 def thread_loop(name):
     global years, days, money, y
@@ -309,7 +308,9 @@ def graph(name):
     plt.xlabel("Time (GameDays)")
     plt.show()
 
-
+def update_loop(name):
+    while True:
+        pass
 
 if __name__ == "__main__":
     import sys
