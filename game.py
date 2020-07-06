@@ -184,6 +184,10 @@ class Ui_MainWindow(object):
 
         #Most gameplay functions below: 
 
+        def update_loop(name):
+            while True:
+                pass
+
         def changeTax(cmd):
             global taxation
             changeTRTo = userInput.replace('change tax rate to', '')
@@ -282,10 +286,6 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 3b8ee08202899bb3b8b9b5f54dcafd565c186270
 
 def thread_loop(name):
     global years, days, money, y
