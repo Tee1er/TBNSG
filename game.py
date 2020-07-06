@@ -17,12 +17,15 @@ import tkinter
 
 global money
 
-#hello teeler
+#hello tee1er
 #do not use capitals when possible
 money = 20000000
 taxation = 0.1
 econOutput = 100000
 happiness = 5.0
+
+atWar = False
+atWarWith = []
 
 affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook", "YEE"]
 negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
@@ -208,11 +211,13 @@ class Ui_MainWindow(object):
             refreshInfoBar()
         
         def declareWar(cmd):
-            cmd.strip('declare war')
+            cmd = cmd.strip('declare war on')
             global countryList
             if cmd in countryList:
+                global atWar
+                global atWarWith
                 atWar = True
-                atWarWith = cmd
+                atWarWith.append(cmd)
                 dispOutput(f'You have declared war on {cmd}.')
 
 
@@ -230,8 +235,7 @@ class Ui_MainWindow(object):
             if userInput in ['help', 'Help', '?']:
                 dispOutput('You can find information on TBNSG in howto.txt, found in the root directory of the game, or type readme')
             if 'declare war' in userInput:
-                #declareWar()
-                pass
+                declareWar(userInput)
             if 'change tax rate to' in userInput:
                 changeTax(userInput)
             if userInput == 'tax':
@@ -248,6 +252,8 @@ class Ui_MainWindow(object):
                 statistics(Input)
             if userInput == "":
                 refreshInfoBar()
+            if userInput in ['enemy', 'at war with?']:
+                statistics('enemy')
         
 
             
@@ -262,6 +268,8 @@ class Ui_MainWindow(object):
                 thr2.start()
             if statistic in ['help', '?']:
                 dispOutput('Statistics are:\ntime\ntax rate\nfinancial/money')
+            if statistic == 'enemy':
+                dispOutput(f'You are at war with {atWarWith}')
 
         #Other functions that aren't really gameplay
         def refreshInfoBar():
