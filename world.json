@@ -1,18 +1,17 @@
 {
-	"countryName": "FU HAPPY",
+    "countryName": "FU HAPPY",
+    "infrastructure": 1,
+    "economicOutput": 0,
+    "taxationRate": 0.0,
+    "happiness": 0.0,
 	"characteristics": {
-		"infrastructure": 1,
 		"climate": "0",
-		"economicOutput": 0,
-		"governmentType": "0",
-		"economyType": "0",
 		"industries": {
 			"1": "A",
 			"2": "B",
 			"3": "C"
-		},
-		"territory": 0
 	},
+	"territory": 0,
 	"otherCountries": {
 		"Aardvark Republic": {
 			"climate": 2,

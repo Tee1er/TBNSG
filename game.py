@@ -15,23 +15,6 @@ import time, json, random, threading, logging
 import matplotlib.pyplot as plt
 import tkinter
 
-global money
-
-#hello tee1er
-#do not use capitals when possible
-money = 20000000
-taxation = 0.1
-econOutput = 100000
-happiness = 5.0
-
-atWar = False
-atWarWith = []
-
-affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook", "YEE"]
-negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
-
-
-
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
             
@@ -45,6 +28,21 @@ gameData = json.load(open('gamedata.json', 'r'))
 
 industries = gameData['industries']
 industryList = list(industries.keys())
+
+global money
+
+#do not use capitals when possible
+world['infrastructure'] = 1
+world['money'] = 20000000
+world['taxationRate'] = 0.1
+world['economicOutput'] = 100000
+world['happiness'] = 5.0
+
+atWar = False
+atWarWith = []
+
+affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook", "YEE", 'ok', 'okay']
+negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -190,6 +188,9 @@ class Ui_MainWindow(object):
 
         #Most gameplay functions below: 
 
+        def upgradeInfrastructure():
+            dispOutput(f'Okay. This will upgrade your infrastructure to level ')
+
         
 
         def changeTax(cmd):
@@ -255,6 +256,9 @@ class Ui_MainWindow(object):
                 refreshInfoBar()
             if userInput in ['enemy', 'at war with?']:
                 statistics('enemy')
+            if userInput == 'upgrade infrastructure':
+                infrastructureUpgradeCost=territory/10  + 40000000*random.randint(0, 10
+                dispOutput(f'This will upgrade your infrastructure at the cost of {infrastructureUpgradeCost}.')
         
 
             
