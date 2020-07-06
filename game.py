@@ -205,7 +205,12 @@ class Ui_MainWindow(object):
         
         def declareWar(cmd):
             cmd.strip('declare war')
-            if cmd in list()
+            global countryList
+            if cmd in countryList:
+                atWar = True
+                atWarWith = cmd
+                dispOutput(f'You have declared war on {cmd}.')
+
 
 
         #The fundamentals - display output, parse input
