@@ -9,12 +9,10 @@
 
 #keep unnecessary features down to improve performance
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
 import time, json, random, threading, logging
 from matplotlib import pyplot as plt
-
 
 #do not use capitals when possible
 money = 20000000
@@ -22,13 +20,27 @@ taxation = 0.1
 econOutput = 100000
 happiness = 5.0
 
-
-
+affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook", "YEE"]
+negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
 
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
 print('Thread Function Here')
-
+def thread_loop(name):
+    days = 1
+    years = 0
+    x = []
+    y = []
+    while True:
+        time.sleep(1)
+        days += 1
+        x.append(days)
+        y.append(money)
+        print(f'check {days}')
+        if days >= 365:
+            days = 0
+            years +=1
+            
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
 countries = world['otherCountries']
@@ -36,8 +48,6 @@ countryList = countries.keys()
 
 #Imports data from defaultworld.json
 defaultWorld = json.load(open('defaultworld.json', 'r'))
-
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -201,13 +211,11 @@ class Ui_MainWindow(object):
             econOutput -= econOutput*taxation
             dispOutput('You have taxed the population.')
 
-
         #The fundamentals - display output, parse input
 
         def dispOutput(text):
             self.plainTextEdit.appendPlainText(text)
             
-
         def dispUsrInput():
             global userInput
             userInput = self.lineEdit.displayText()
@@ -225,16 +233,18 @@ class Ui_MainWindow(object):
                 tax()
             if userInput in ['clock', 'time', 'years', 'days']:
                 dispOutput(f'Your country has existed for {years} years and {days} days.')
+            if userInput in ['stop', 'quit', 'exit']:
+                dispOutput('Quitting...')
+                thr._stop()
+                quit()
 
-        def clock():
-            currentTime = time.time() - gameStart
-            global years
-            global days
-            years = round(currentTime // 365)
-            days = round((currentTime % 365)/5)
-
+        # not neccesary after implementation of main loop process
+        # def clock():
+        #     currentTime = time.time() - gameStart
+        #     global years
+        #     global days
+            
         #Stats
-
         def statistics(statistic):
             if statistic == 'time':
                 dispOutput(f'Your country has existed for {years} years and {days} day(s).')
@@ -244,8 +254,8 @@ class Ui_MainWindow(object):
                 global x
                 global y
                 plt.plot(x, y)
-        #Other functions that aren't really gameplay
 
+        #Other functions that aren't really gameplay
         def refreshInfoBar():
             _translate = QtCore.QCoreApplication.translate
             self.label_3.setText(_translate('MainWindow', f'Money - ${money}'))
@@ -257,7 +267,6 @@ class Ui_MainWindow(object):
         self.lineEdit.returnPressed.connect(dispUsrInput)
         self.lineEdit.returnPressed.connect(parseInput)
         self.lineEdit.returnPressed.connect(self.lineEdit.clear)
-        self.lineEdit.returnPressed.connect(clock)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -278,7 +287,8 @@ if __name__ == "__main__":
     import sys
     # Call and start threads here
     print('Threads Starting')
-
+    thr = threading.Thread(target=thread_loop, args=(1,))
+    thr.start()
     # UI Main Startup, do not block
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
