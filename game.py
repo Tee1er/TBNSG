@@ -276,6 +276,9 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
+        def update_loop(name):
+            while True:
+                pass
 
 def thread_loop(name):
     global years, days, money, y
@@ -306,9 +309,7 @@ def graph(name):
     plt.xlabel("Time (GameDays)")
     plt.show()
 
-def update_loop(name):
-    while True:
-        pass
+
 
 if __name__ == "__main__":
     import sys
