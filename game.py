@@ -10,7 +10,7 @@
 #keep unnecessary features down to improve performance
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
+from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject, qapp
 import time, json, random, threading, logging
 import matplotlib.pyplot as plt
 import tkinter
@@ -185,6 +185,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        
 
         #Most gameplay functions below: 
 
@@ -337,7 +338,7 @@ def graph(name):
 
 def update_loop(name):
     while True:
-        pass
+        QtWidgets.QApplication.processEvents()
 
 if __name__ == "__main__":
     import sys
