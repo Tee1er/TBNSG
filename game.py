@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
 import time, json, random, threading, logging
 import matplotlib.pyplot as plt
+import tkinter
 
 global money
 
