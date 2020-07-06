@@ -14,6 +14,9 @@ from PyQt5.QtCore import QThread, pyqtSignal, QRunnable, QObject
 import time, json, random, threading, logging
 from matplotlib import pyplot as plt
 
+global money
+
+
 #do not use capitals when possible
 money = 20000000
 taxation = 0.1
@@ -23,23 +26,27 @@ happiness = 5.0
 affirmative = ["yes", "Yes", "sure", "Sure", "WHY NOT", "Y", "y", "ohok", "ook", "YEE"]
 negative = ['no', 'nothx', 'nope', 'NO', 'AAAA', 'please no']
 
+
+
 #Records when the game was started - important for function time() later on
 gameStart = time.time()
-print('Thread Function Here')
-def thread_loop(name):
-    days = 1
-    years = 0
-    x = []
-    y = []
-    while True:
-        time.sleep(1)
-        days += 1
-        x.append(days)
-        y.append(money)
-        print(f'check {days}')
-        if days >= 365:
-            days = 0
-            years +=1
+
+# def thread_loop(name):
+#     global money
+#     global dispdays, years, days
+#     days = 1
+#     years = 0
+#     x = []
+#     y = []
+#     while True:
+#         time.sleep(3)
+#         days += 1
+#         x.append(days)
+#         y.append(money)
+#         print(f'check {days}')
+#         money += econOutput
+#         dispdays = days % 365
+#         years = days//365
             
 #Imports data from world.json
 world = json.load(open('world.json', 'r'))
@@ -247,7 +254,7 @@ class Ui_MainWindow(object):
         #Stats
         def statistics(statistic):
             if statistic == 'time':
-                dispOutput(f'Your country has existed for {years} years and {days} day(s).')
+                dispOutput(f'Your country has existed for {years} years and {dispdays} day(s).')
             if statistic == 'tax rate':
                 dispOutput(f'The tax rate is currently {taxation*100}%')
             if statistic in ["financial", 'money']:
@@ -280,12 +287,27 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "TBNSG"))
         self.label_6.setText(_translate("MainWindow", "  >  "))
 
-
-
+def thread_loop(name):
+    global money
+    global dispdays, years, days
+    days = 1
+    years = 0
+    x = []
+    y = []
+    while True:
+        time.sleep(3)
+        days += 1
+        x.append(days)
+        y.append(money)
+        print(f'check {days}')
+        money += econOutput
+        dispdays = days % 365
+        years = days//365
 
 if __name__ == "__main__":
     import sys
     # Call and start threads here
+    
     print('Threads Starting')
     thr = threading.Thread(target=thread_loop, args=(1,), daemon=True)
     thr.start()
