@@ -281,18 +281,20 @@ def thread_loop(name):
     global years, days, money, y
     x = []
     y = []
+    dayss =1
     while True:
         #this is actually a lot better than taxes b/c it's a constant stream of money, but is it realistic enough?; 
         econStability = (10-happiness)*50000
         time.sleep(0.5)
+        dayss += 1
         randy = random.randint((econOutput-econStability), (econOutput+econStability))
         money += randy
         # x.append(days)
         y.append(money)
         # I think this method of keeping time is simpler and easier than the previous one. Every 3 seconds a day ticks past - it's approx. 20m = 1 year in game; 
         currentTime = time.time() - gameStart
-        days = round((currentTime % 365)/3)
-        years = round((currentTime // 365)/3)
+        days = round((dayss % 365)/3)
+        years = round((dayss // 365)/3)
         
         
 
@@ -306,7 +308,7 @@ def graph(name):
 
 def update_loop(name):
     while True:
-        refreshInfoBar()
+        pass
 
 if __name__ == "__main__":
     import sys
